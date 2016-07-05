@@ -1,0 +1,55 @@
+@import 'settings';
+@import 'foundation';
+
+
+.ht-red-gradient {
+	
+	background: $primary-color;
+    background: -moz-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #6d0019), color-stop(56%, #8f0222), color-stop(100%, #a90329));
+    background: -webkit-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
+    background: -o-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
+    background: -ms-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
+    background: linear-gradient(to right, #6d0019 0%, #8f0222 56%, #a90329 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329', GradientType=1 );
+}
+
+.hdr p{
+	color: #ffffff;
+	font-weight: bold;
+	font-size: .9em;
+}
+
+th.hdr, th.no-bottom {
+	padding-bottom: 0px;
+}
+
+.red-em {
+	color: $primary-color;
+}
+
+.one-half {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.white-bg {
+  background-color: #ffffff;
+}
+
+.bdr {
+   border-right: 1.5px solid $primary-color;	
+}
+
+.left-bdr {
+	border-left: 1px solid #D9DADA;
+}
+
+.red-box {
+	border: 2px solid $primary-color;
+}
+
+.red-box .padding {
+	padding-left: 6px;
+	padding-top: 6px;
+}

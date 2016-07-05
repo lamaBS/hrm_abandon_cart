@@ -1,0 +1,138 @@
+{******************************************************************
+ * purpose: 
+ *    create the email you would like to send to the customers
+ *    who start but do not complete the checkout process.  You 
+ *    can turn on cart abandonment emails in 
+ *    Settings->Options->Cart Abandonment Options
+ *
+ * to use:
+ *    create your email below this comment.  You can use
+ *    HTML, smarty and/or plain text for your email. 
+ *
+ * variables available: 
+ *    {$first_name} is the first name of the customer, if available
+ *    {$last_name} is the last name of the customer, if available
+ *    {$email} is the email address of the customer
+ *    {$email_id} is the id of the cart abandonment email listed under Settings -> Cart Abandonment
+ *    {$email_name} is the name of the cart abandonment email listed under Settings -> Cart Abandonment
+ *    {$cart} is an array of items in the customer's cart
+ *            The elements in the {$cart} array are the same as the 
+ *            elements in the {$cart} array in cartitems.tpl
+ *    {$session_link} should be included in any link that you wish to reactivate the customer's session.
+ *                    Its format is: order_id=123&session_id=ABCDEFG1234567890
+ *                    Example:
+ *                      <a href="http://my-store.com/viewcart?{$session_link}">View Cart</a>
+ *                    With promo:
+ *                      <a href="http://my-store.com/viewcart?p=PROMO_CODE&{$session_link}">View Cart</a>
+ *    {$customer_cgroups} is an array of customer groups the recipient belongs to.
+ *                        The array is keyed by customer group id.
+ ********************************************************************}
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<table width="550" border="0" align="center">
+  <tr>
+    <td colspan="2">
+      <h1>Uh Oh!  You’ve left some items in your Shopping Cart!</h1>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      {if #abandoned_email_text# != ''}
+        {assign var=abandon value=#abandoned_email_text#|replace:"[[first_name]]":$billing.first_name}   
+        {assign var=abandon value=$abandon|replace:"[[last_name]]":$billing.last_name}   
+        {assign var=abandon value=$abandon|replace:"[[co_name]]":#store_name#}
+        {$abandon}   
+      {else}
+      <p> Hi  {$first_name}!</br>
+      Just sending you a friendly reminder, because we know unexpected things happen, and sometimes even a string on your finger or a sticky note just doesn’t do.</p>
+      {/if}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      &nbsp;
+    </td>
+  </tr>
+  <tr>
+  <tr>
+    <td colspan="2">
+      <b> Here’s what you have in your cart:</b>
+    </td>
+  </tr> 
+  <tr>
+    <td colspan="2">
+      <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+       <tr bgcolor="#cccccc">
+        <td>
+          <b>Qty</b>
+        </td>
+        <td>
+          <b>Item #</b>
+        </td>
+        <td>
+          <b>Description</b>
+        </td>
+        <td>
+          <b>Price</b>
+        </td>
+      </tr>
+      {foreach from=$cart key=key item=prod}
+      {if $prod.qty > 0 && $prod.build_prod_id == ''}
+      <tr>
+        <td valign="top">
+          {$prod.qty}
+        </td>
+        <td valign="top">
+         {if $prod.att_sku == ''}{$prod.sku}{else}{$prod.att_sku}{/if}
+        </td>
+        <td valign="top">
+           {if $prod.web_image != ''}<img src='{$prod.web_image|img_prefix}' alt='{$prod.name|replace:"&":"&amp;"}' width='50' class='bordered' /></a>{/if}
+          {$prod.name}
+          {if $prod.gifts|@count > 0}
+            {foreach from=$prod.gifts key=i item=glist}
+              {if $glist != ''}
+                 <br />* {$glist}
+              {/if}
+            {/foreach}
+          {/if}
+          {if $prod.note != ''}
+            <br />Note: {$prod.note}
+          {/if}
+          {if $prod.att_list != ''}
+             {$prod.att_list}
+          {/if}
+         </td>
+         <td valign="top">
+           {if $prod.build_parent != 'y'}
+             {$currency_type}{$prod.price|commify}
+           {else}
+             &nbsp;
+           {/if}
+         </td>
+       </tr>
+       {/if}
+       {/foreach}
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+         <p>You can zip right back to finish up by clicking this link:   <a href="http://my-store.com/viewcart?{$session_link}">View Cart</a></p>
+    <p>Items aren’t reserved until you complete your purchase, and some items are limited.</p>
+    <p>Hurry back so you don’t miss out!</p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <b><font size="+1">Have questions or need help?</font></b>
+    <p>Call: 800-345-2396  (M-F, 8 am to 5pm Eastern)<br>
+    E-Mail: sales@hartvilletool.com</p>
+    <p>You are receiving this e-mail because you registered on our web site with the e-mail address {$email}</p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

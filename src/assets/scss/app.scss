@@ -2,16 +2,8 @@
 @import 'foundation';
 
 
-.ht-red-gradient {
-	
+.ht-red {
 	background: $primary-color;
-    background: -moz-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, #6d0019), color-stop(56%, #8f0222), color-stop(100%, #a90329));
-    background: -webkit-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
-    background: -o-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
-    background: -ms-linear-gradient(left, #6d0019 0%, #8f0222 56%, #a90329 100%);
-    background: linear-gradient(to right, #6d0019 0%, #8f0222 56%, #a90329 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', endColorstr='#a90329', GradientType=1 );
 }
 
 .hdr p{
@@ -38,8 +30,9 @@ th.hdr, th.no-bottom {
 }
 
 .bdr {
-   border-right: 1.5px solid $primary-color;	
+   border-right: 1.5px solid $primary-color;
 }
+
 
 .left-bdr {
 	border-left: 1px solid #D9DADA;
@@ -52,4 +45,27 @@ th.hdr, th.no-bottom {
 .red-box .padding {
 	padding-left: 6px;
 	padding-top: 6px;
+}
+
+@media only screen and (max-width: #{$global-breakpoint}) {
+
+	.bdr {
+		border: 0 !important;
+	}
+
+	.no-bdr span.hide-for-large, .bdr span.hide-for-large {
+		font-size: 12px !important;
+		font-weight: 400 !important;
+		line-height: 16px !important;
+		padding-left: -10px !important;
+	}
+
+	.no-bdr span.fx, .bdr span.fx {
+		padding-left: 36px !important;
+	}
+
+	.bg-img {
+		background: none !important;
+	}
+
 }

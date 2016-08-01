@@ -1,15 +1,15 @@
 @import 'settings';
 @import 'foundation';
 
-
 .ht-red {
 	background: $primary-color;
 }
 
-.hdr p{
+.ht-red th{
 	color: #ffffff;
 	font-weight: bold;
-	font-size: .9em;
+	font-size: 1.25em;
+	padding: 5px;
 }
 
 th.hdr, th.no-bottom {
